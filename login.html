@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0e9e9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 400px;
+      padding: 20px;
+      background-color: #f8f7fa;
+      border-radius: 8px;
+      box-shadow: 0 15px 15px rgba(33, 27, 38, 0.873);
+      position: relative;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button[type="button"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+   button[type="button"]:hover {
+      background-color: #0056b3;
+    }
+    .forgot-password,
+    .create-account {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .forgot-password a,
+    .create-account a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    .copyright {
+  position: absolute; /* Add this line */
+  bottom: 10px; /* Add this line */
+  width: 100%; /* Add this line */
+  text-align: center; /* Add this line */
+}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Login</h2>
+  <form action="#" method="post">
+    <label for="login_email">Email</label>
+    <input type="text" id="login_email" name="login_email" placeholder="Enter your email" required>
+    <label for="password">Password:</label>
+    <input type="password" id="login_password" name="login_password" placeholder="Enter your password" required>
+    
+    <button type="button" id="login" name="login" value="login">Login</button>
+    
+  </form>
+  <div class="forgot-password">
+    <a href="forgot-password.html">Forgot Password?</a>
+  </div>
+  <div class="create-account">
+    <a href="register.html">Create New Account</a>
+  </div>
+</div>
+<br>
+<div class="copyright">
+<p>
+©
+<script>document.write(new Date().getFullYear())</script> | INTERNATIONAL WRITERS
+</p>
+</div>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+      apiKey: "AIzaSyB6PIBb6GvXFaE0ZX9XS2r-8e5mYN5FifM",
+      authDomain: "writerzkenya.firebaseapp.com",
+      projectId: "writerzkenya",
+      storageBucket: "writerzkenya.appspot.com",
+      messagingSenderId: "609044591883",
+      appId: "1:609044591883:web:39119609a075ee90e15e0e",
+      measurementId: "G-NG87JBENW4"
+    };
+
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth();
+
+
+  document.getElementById("login").addEventListener("click", function() {
+      var email = document.getElementById("login_email").value;
+      var password = document.getElementById("login_password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential)=>{
+          const user = userCredential.user;
+          console.log(user);
+          alert("Login successfully!!!");
+       window.location.href = "./dashboard.html"
+          
+
+      })
+      .catch((error)=>{
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          alert(error);
+      });
+  });
+</script>
+
+<a id="redirectLink" style="display: none;"></a>
+
+
+
+</body>
+
+
+
+</html>
